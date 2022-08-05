@@ -3,7 +3,6 @@ require('dotenv').config();
 
 const { Client, GatewayIntentBits } = require('discord.js');
 const weather = require('./commands/weather.js')
-console.log(weather);
 
 const client = new Client({ intents: [ GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent ] });
 const prefix = "~";
