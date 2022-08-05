@@ -2,8 +2,10 @@
 require('dotenv').config();
 
 const { Client, GatewayIntentBits } = require('discord.js');
-const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent]});
+const weather = require('./commands/weather.js')
+console.log(weather);
 
+const client = new Client({ intents: [ GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent ] });
 const prefix = "~";
 
 
@@ -14,13 +16,14 @@ client.on('ready', () => {
 client.on('messageCreate', (message) => {
   if (message.author.bot) return;
   if (message.content.startsWith(prefix)) {
-    const command = message.content.split(" ")[0].replace(prefix, "").toLowerCase();
+    let args = message.content.split(" ");
+    const command = args.shift().replace(prefix, "").toLowerCase();
     switch(command) {
       case 'weather':
-        // do something
+        weather(client, message, args);
         return;
-      case 'another':
-        // do something else
+      case 'love':
+        if (message.author.id === '235047280351248395') message.reply('I love you too Ku ri su!!! <3');
         return;
     }
   }
